@@ -1,0 +1,47 @@
+[versions]
+kotlin = "1.9.23"
+
+kotlinxHtml = "0.10.1"
+kotlinCss = "1.0.0-pre.129-kotlin-1.4.20"
+
+kotest = "5.8.1"
+kotlinFaker = "2.0.0-rc.1"
+
+ktor = "2.3.9"
+
+logback = "1.4.14"
+
+webjarsAlpinejs = "3.13.5"
+webjarsBootstrap = "5.3.3"
+webjarsBootstrapIcons = "1.11.3"
+webjarsHtmx = "1.9.10"
+webjarsHyperscript = "0.9.12"
+
+[libraries]
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+
+kotestAssertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotestCommon = { group = "io.kotest", name = "kotest-common", version.ref = "kotest" }
+kotestFrameworkDatatest = { group = "io.kotest", name = "kotest-framework-datatest", version.ref = "kotest" }
+kotestRunner = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+
+kotlinFaker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "kotlinFaker"}
+
+kotlinx-html-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-html-jvm", version.ref = "kotlinxHtml"}
+kotlin-css-jvm = { group = "org.jetbrains", name = "kotlin-css-jvm", version.ref = "kotlinCss" }
+
+ktor-server-core-jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-htmlbuilder = { group = "io.ktor", name = "ktor-server-html-builder-jvm", version.ref = "ktor" }
+ktor-server-netty-jvm = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-server-tests-jvm = { group = "io.ktor", name = "ktor-server-tests-jvm", version.ref = "ktor" }
+ktor-server-webjars-jvm = { group = "io.ktor", name = "ktor-server-webjars-jvm", version.ref = "ktor" }
+
+
+webjars-alpinejs = { group = "org.webjars.npm", name = "alpinejs", version.ref = "webjarsAlpinejs" }
+webjars-bootstrap-core = { group = "org.webjars", name = "bootstrap", version.ref = "webjarsBootstrap" }
+webjars-bootstrap-icons = { group = "org.webjars.npm", name = "bootstrap-icons", version.ref = "webjarsBootstrapIcons" }
+webjars-htmx = { group = "org.webjars.npm", name = "htmx.org", version.ref = "webjarsHtmx" }
+webjars-hyperscript = { group = "org.webjars.npm", name = "hyperscript.org", version.ref = "webjarsHyperscript" }
+
+[bundles]
+kotest = ["kotestAssertions", "kotestCommon", "kotestFrameworkDatatest", "kotestRunner"]
