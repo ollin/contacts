@@ -36,11 +36,7 @@ fun HTML.contacts() {
         }
 
 
-        h1 { +"Contacts" }
-        ul {
-            for (n in 1..10) {
-                li { +"$n" }
-            }
-        }
+        // content
+
     }
 }
