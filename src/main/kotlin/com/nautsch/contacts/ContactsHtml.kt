@@ -32,11 +32,14 @@ fun HTML.contacts() {
                 href = "#"
                 +"Contacts"
             }
-
         }
 
 
         // content
+        img {
+            alt = "Loading..."
+            classes = setOf("htmx-indicator")
+        }
 
     }
 }
