@@ -24,9 +24,7 @@ fun HTML.contacts() {
     body {
         attributes["hx-boost"] = "true"
 
-        nav {
-            classes = setOf("navbar", "bg-body-tertiary")
-
+        nav() {
             a {
                 classes = setOf("navbar-brand")
                 href = "#"
