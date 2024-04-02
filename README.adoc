@@ -1,0 +1,8 @@
+= Build
+
+Install all dependencies and build:
+
+[source,bash]
+----
+./gradlew build
+----

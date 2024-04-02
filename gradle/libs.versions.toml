@@ -11,6 +11,8 @@ ktor = "2.3.9"
 
 logback = "1.4.14"
 
+nodePlugin = "7.0.2"
+
 webjarsAlpinejs = "3.13.5"
 webjarsBootstrap = "5.3.3"
 webjarsBootstrapIcons = "1.11.3"
@@ -47,3 +49,6 @@ webjars-tailwindcss = { group = "org.webjars.npm", name = "tailwindcss", version
 
 [bundles]
 kotest = ["kotestAssertions", "kotestCommon", "kotestFrameworkDatatest", "kotestRunner"]
+
+[plugins]
+nodePlugin = { id = "com.github.node-gradle.node", version.ref = "nodePlugin"}
