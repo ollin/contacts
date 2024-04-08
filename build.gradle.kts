@@ -35,12 +35,13 @@ dependencies {
     implementation(libs.kotlinx.html.jvm)
     implementation(libs.logback.classic)
 
+    implementation(libs.kotlinFaker)
+
     implementation(libs.webjars.alpinejs)
     implementation(libs.webjars.bootstrap.core)
     implementation(libs.webjars.bootstrap.icons)
     implementation(libs.webjars.htmx)
     implementation(libs.webjars.hyperscript)
-
 
     testImplementation(libs.ktor.server.tests.jvm)
     testImplementation(libs.bundles.kotest)

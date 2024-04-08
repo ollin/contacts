@@ -1,5 +1,8 @@
-* [ ] data for table
-* [ ] table
+
+* [ ] inject repo
+* [ ] bdd test for table
 * [ ] deliver static content as gzip
+* [x] data for table via repo
+* [x] table
 * [x] `gradle build -t` with npm
 * [x] check transformations
