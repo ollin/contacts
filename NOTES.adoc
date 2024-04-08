@@ -1,0 +1,5 @@
+* [ ] data for table
+* [ ] table
+* [ ] deliver static content as gzip
+* [x] `gradle build -t` with npm
+* [x] check transformations
