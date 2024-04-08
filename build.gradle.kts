@@ -1,5 +1,4 @@
 import com.github.gradle.node.npm.task.NpxTask
-import java.util.Properties
 
 plugins {
     idea
@@ -51,7 +50,7 @@ tasks.withType<Jar> {
     manifest {
         attributes(
             mapOf(
-                "Implementation-Title"  to project.name,
+                "Implementation-Title" to project.name,
                 "Implementation-Version" to project.version
             )
         )
@@ -61,14 +60,17 @@ tasks.withType<Jar> {
 
 tasks.register("generateTailwindCSS", NpxTask::class) {
     command.set("tailwindcss")
-    args.set(listOf(
-        "-m",
-        "-i", "./src/main/frontend/input.css",
-        "-o", "./build/resources/main/public/css/output.css",
-    ))
+    args.set(
+        listOf(
+//        "-m",
+            "-i", "./src/main/frontend/input.css",
+            "-o", "./build/resources/main/public/css/output.css",
+        )
+    )
     inputs.files(
         file("./src/main/frontend/input.css"),
         file("./tailwind.config.js"),
+        fileTree("./src/main/kotlin").matching { include("**/*.kt") }
     )
     outputs.files(
         file("./build/resources/main/public/css/output.css")
