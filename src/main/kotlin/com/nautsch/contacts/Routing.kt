@@ -9,6 +9,9 @@ import io.ktor.server.routing.*
 import io.ktor.server.webjars.*
 
 fun Application.configureRouting() {
+
+    val repo = ContactRepository()
+
     install(Webjars) {
         path = "/webjars" //defaults to /webjars
     }
@@ -20,7 +23,7 @@ fun Application.configureRouting() {
         route("/contacts") {
             get  {
                 call.respondHtml(HttpStatusCode.OK) {
-                    contacts()
+                    contacts(repo.listAll())
                 }
             }
         }

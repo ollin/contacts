@@ -1,6 +1,7 @@
 package com.nautsch.contacts
 
 import io.github.serpro69.kfaker.Faker
+import io.github.serpro69.kfaker.fakerConfig
 import java.util.*
 
 class ContactRepository {
@@ -8,7 +9,8 @@ class ContactRepository {
     private var idContactMap: Map<UUID, Contact>
 
     init {
-        val faker = Faker()
+        val config = fakerConfig { locale = "de-CH"}
+        val faker = Faker(config)
         val tmpIdContactMap = mutableMapOf<UUID, Contact>()
         (1..100).forEach {
             val tmpFirstName = faker.name.firstName()
@@ -20,7 +22,7 @@ class ContactRepository {
                     id = tmpId,
                     firstName = tmpFirstName,
                     lastName = tmpLastName,
-                    email = faker.internet.safeEmail("${tmpFirstName}.${tmpLastName}".replace(" ", "")),
+                    email = faker.internet.safeEmail("${tmpFirstName.lowercase()}.${tmpLastName.lowercase()}".replace(" ", ".")),
                     phone = faker.phoneNumber.phoneNumber()
                 )
             )

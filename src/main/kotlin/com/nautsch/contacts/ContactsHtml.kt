@@ -4,7 +4,7 @@ import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.ThScope.col
 
-fun HTML.contacts() {
+fun HTML.contacts(contactList: List<Contact>) {
     classes = setOf("h-full", "bg-gray-100")
 
     head {
@@ -309,15 +309,17 @@ fun HTML.contacts() {
                                                 }
                                             }
                                             tbody("divide-y divide-gray-200 bg-white") {
-                                                tr {
-                                                    td("whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6") { +"""Oliver""" }
-                                                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +"""Nautsch""" }
-                                                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +"""oliver@email.local""" }
-                                                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +"""+41 79 555 55 55""" }
-                                                    td("relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6") {
-                                                        a(classes = "text-indigo-600 hover:text-indigo-900") {
-                                                            href = "#"
-                                                            +"""Edit"""
+                                                contactList.forEach { contact ->
+                                                    tr {
+                                                        td("whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6") { +contact.firstName }
+                                                        td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.lastName }
+                                                        td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.email }
+                                                        td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.phone }
+                                                        td("relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6") {
+                                                            a(classes = "text-indigo-600 hover:text-indigo-900") {
+                                                                href = "#"
+                                                                +"""Edit"""
+                                                            }
                                                         }
                                                     }
                                                 }
