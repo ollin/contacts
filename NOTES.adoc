@@ -1,7 +1,10 @@
 
-* [ ] inject repo
+* [ ] count contacts - slow
+* [ ] delete contect
+* [ ] add contact
 * [ ] bdd test for table
 * [ ] deliver static content as gzip
+* [x] inject repo
 * [x] data for table via repo
 * [x] table
 * [x] `gradle build -t` with npm
