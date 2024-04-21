@@ -1,12 +1,13 @@
 package com.nautsch.contacts
 
+import com.nautsch.utils.UuidAsString
 import io.github.serpro69.kfaker.Faker
 import io.github.serpro69.kfaker.fakerConfig
 import java.util.*
 
 class ContactRepository {
 
-    private var idContactMap: Map<UUID, Contact>
+    private var idContactMap: MutableMap<UuidAsString, Contact>
 
     init {
         val config = fakerConfig { locale = "de-CH"}
@@ -33,5 +34,9 @@ class ContactRepository {
 
     fun listAll(): List<Contact> {
         return idContactMap.values.toList()
+    }
+
+    fun delete(id: UUID): Boolean {
+        return idContactMap.remove(id) != null
     }
 }

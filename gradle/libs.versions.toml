@@ -36,6 +36,7 @@ kotlin-css-jvm = { group = "org.jetbrains", name = "kotlin-css-jvm", version.ref
 ktor-server-core-jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-htmlbuilder = { group = "io.ktor", name = "ktor-server-html-builder-jvm", version.ref = "ktor" }
 ktor-server-netty-jvm = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-server-resources = { group = "io.ktor", name = "ktor-server-resources", version.ref = "ktor" }
 ktor-server-tests-jvm = { group = "io.ktor", name = "ktor-server-tests-jvm", version.ref = "ktor" }
 ktor-server-webjars-jvm = { group = "io.ktor", name = "ktor-server-webjars-jvm", version.ref = "ktor" }
 
