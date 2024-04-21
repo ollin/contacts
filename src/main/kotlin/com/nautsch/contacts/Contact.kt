@@ -1,9 +1,9 @@
 package com.nautsch.contacts
 
-import java.util.UUID
+import com.nautsch.utils.UuidAsString
 
 data class Contact(
-    val id: UUID,
+    val id: UuidAsString,
     val firstName: String,
     val lastName: String,
     val email: String,

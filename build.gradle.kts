@@ -4,6 +4,7 @@ plugins {
     idea
     base
     kotlin("jvm") version libs.versions.kotlin
+    kotlin("plugin.serialization") version libs.versions.kotlin
     id("io.ktor.plugin") version libs.versions.ktor
     alias(libs.plugins.nodePlugin)
 }
@@ -27,10 +28,11 @@ repositories {
 
 dependencies {
 
-    implementation(libs.ktor.server.htmlbuilder)
     implementation(libs.ktor.server.core.jvm)
-    implementation(libs.ktor.server.webjars.jvm)
+    implementation(libs.ktor.server.htmlbuilder)
     implementation(libs.ktor.server.netty.jvm)
+    implementation(libs.ktor.server.resources)
+    implementation(libs.ktor.server.webjars.jvm)
     implementation(libs.kotlin.css.jvm)
     implementation(libs.kotlinx.html.jvm)
     implementation(libs.logback.classic)

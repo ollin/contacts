@@ -302,9 +302,13 @@ fun HTML.contacts(contactList: List<Contact>) {
                                                         scope = col
                                                         +"""Phone"""
                                                     }
-                                                    th(classes = "relative py-3.5 pl-3 pr-4 sm:pr-6") {
+                                                    th(classes = "relative py-3.5 pl-1 pr-1 sm:pr-1") {
                                                         scope = col
                                                         span("sr-only") { +"""Edit""" }
+                                                    }
+                                                    th(classes = "relative py-3.5 pl-1 pr-4 sm:pr-4") {
+                                                        scope = col
+                                                        span("sr-only") { +"""Delete""" }
                                                     }
                                                 }
                                             }
@@ -315,10 +319,17 @@ fun HTML.contacts(contactList: List<Contact>) {
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.lastName }
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.email }
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.phone }
-                                                        td("relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6") {
+                                                        td("relative whitespace-nowrap py-4 pl-1 pr-1 text-right text-sm font-medium sm:pr-1") {
                                                             a(classes = "text-indigo-600 hover:text-indigo-900") {
                                                                 href = "#"
                                                                 +"""Edit"""
+                                                            }
+                                                        }
+                                                        td("relative whitespace-nowrap py-4 pl-1 pr-4 text-right text-sm font-medium sm:pr-4") {
+                                                            a(classes = "text-red-600 hover:text-indigo-900") {
+                                                                attributes["hx-delete"] = "/contacts/${contact.id}"
+                                                                attributes["hx-target"] = "body"
+                                                                +"""Delete"""
                                                             }
                                                         }
                                                     }
