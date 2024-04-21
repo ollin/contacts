@@ -3,6 +3,7 @@ package com.nautsch.contacts
 import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.ThScope.col
+import kotlinx.html.stream.createHTML
 
 fun HTML.contacts(contactList: List<Contact>) {
     classes = setOf("h-full", "bg-gray-100")
@@ -27,10 +28,10 @@ fun HTML.contacts(contactList: List<Contact>) {
 
         div(classes = "min-h-full") {
             nav(classes = "bg-gray-800") {
-                div("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8") {
-                    div("flex h-16 items-center justify-between") {
-                        div("flex items-center") {
-                            div("flex-shrink-0") {
+                div(classes = "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8") {
+                    div(classes = "flex h-16 items-center justify-between") {
+                        div(classes = "flex items-center") {
+                            div(classes = "flex-shrink-0") {
                                 img(classes = "h-8 w-8") {
                                     src = "public/images/contacts.svg"
                                     alt = "Your Company"
@@ -76,6 +77,7 @@ fun HTML.contacts(contactList: List<Contact>) {
                                         attributes["stroke-width"] = "1.5"
                                         attributes["stroke"] = "currentColor"
                                         attributes["aria-hidden"] = "true"
+
                                         unsafe { +"""<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>""" }
                                     }
                                 }
@@ -329,6 +331,7 @@ fun HTML.contacts(contactList: List<Contact>) {
                                                             a(classes = "text-red-600 hover:text-indigo-900") {
                                                                 attributes["hx-delete"] = "/contacts/${contact.id}"
                                                                 attributes["hx-target"] = "body"
+                                                                attributes["hx-confirm"] = "Are you sure you want to delete '${contact.lastName}, ${contact.firstName}?'"
                                                                 +"""Delete"""
                                                             }
                                                         }
@@ -343,8 +346,6 @@ fun HTML.contacts(contactList: List<Contact>) {
                     }
 
 
-
-
                 }
             }
 
@@ -357,3 +358,81 @@ fun HTML.contacts(contactList: List<Contact>) {
         }
     }
 }
+
+private fun createModal() = createHTML()
+    .div(classes = "relative z-10") {
+        attributes["aria-labelledby"] = "modal-title"
+        attributes["role"] = "dialog"
+        attributes["aria-modal"] = "true"
+        attributes["x-data"] = "{ open: true }" // Modal Zustand initialisiert
+
+        div(classes = "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity") {
+            // Background backdrop, show/hide based on modal state.
+            attributes["x-show.transition.opacity"] = "open"
+            attributes["x-transition:enter"] = "ease-out duration-300"
+            attributes["x-transition:enter-start"] = "opacity-0"
+            attributes["x-transition:enter-end"] = "opacity-100"
+            attributes["x-transition:leave"] = "ease-in duration-200"
+            attributes["x-transition:leave-start"] = "opacity-100"
+            attributes["x-transition:leave-end"] = "opacity-0"
+        }
+
+        div(classes = "fixed inset-0 z-10 w-screen overflow-y-auto") {
+            div(classes = "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0") {
+                div(classes = "relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6") {
+                    div(classes = "absolute right-0 top-0 hidden pr-4 pt-4 sm:block") {
+                        button(classes = "rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2") {
+                            type = button
+                            attributes["x-on:click"] = "open = false" // Schließt das Modal
+                            span(classes = "sr-only") { +"Close" }
+                            svg(classes = "h-6 w-6") {
+                                attributes["fill"] = "none"
+                                attributes["viewbox"] = "0 0 24 24"
+                                attributes["stroke-width"] = "1.5"
+                                attributes["stroke"] = "currentColor"
+                                attributes["aria-hidden"] = "true"
+                                unsafe { +"""<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>""" }
+                            }
+                        }
+                    }
+                    div(classes = "sm:flex sm:items-start") {
+                        div(classes = "mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10") {
+                            svg(classes = "h-6 w-6 text-red-600") {
+                                attributes["fill"] = "none"
+                                attributes["viewbox"] = "0 0 24 24"
+                                attributes["stroke-width"] = "1.5"
+                                attributes["stroke"] = "currentColor"
+                                attributes["aria-hidden"] = "true"
+                                unsafe { +"""<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"></path>""" }
+                            }
+                        }
+                        div(classes = "mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left") {
+                            h3(
+                                classes = "text-base font-semibold leading-6 text-gray-900",
+                            ) {
+                                id = "modal-title"
+                                +"Delete Contact"
+                            }
+                            div(classes = "mt-2") {
+                                p(classes = "text-sm text-gray-500") { +"Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone." }
+                            }
+                        }
+                    }
+                    div(classes = "mt-5 sm:mt-4 sm:flex sm:flex-row-reverse") {
+                        button(classes = "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto") {
+                            type = button
+                            attributes["x-on:click"] = "open = false" // Schließt das Modal und deaktiviert das Konto
+                            +"Delete"
+                        }
+                        button(classes = "mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto") {
+                            type = button
+                            attributes["x-on:click"] = "open = false" // Schließt das Modal
+                            +"Cancel"
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
