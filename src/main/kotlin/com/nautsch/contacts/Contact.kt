@@ -8,4 +8,5 @@ data class Contact(
     val lastName: String,
     val email: String,
     val phone: String,
+    val postalCode: String,
 )

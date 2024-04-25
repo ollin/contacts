@@ -24,7 +24,8 @@ class ContactRepository {
                     firstName = tmpFirstName,
                     lastName = tmpLastName,
                     email = faker.internet.safeEmail("${tmpFirstName.lowercase()}.${tmpLastName.lowercase()}".replace(" ", ".")),
-                    phone = faker.phoneNumber.phoneNumber()
+                    phone = faker.phoneNumber.phoneNumber(),
+                    postalCode = faker.address.postcode()
                 )
             )
         }
