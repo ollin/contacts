@@ -304,6 +304,10 @@ fun HTML.contacts(contactList: List<Contact>) {
                                                         scope = col
                                                         +"""Phone"""
                                                     }
+                                                    th(classes = "px-3 py-3.5 text-left text-sm font-semibold text-gray-900") {
+                                                        scope = col
+                                                        +"""Postal Code"""
+                                                    }
                                                     th(classes = "relative py-3.5 pl-1 pr-1 sm:pr-1") {
                                                         scope = col
                                                         span("sr-only") { +"""Edit""" }
@@ -321,6 +325,7 @@ fun HTML.contacts(contactList: List<Contact>) {
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.lastName }
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.email }
                                                         td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.phone }
+                                                        td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.postalCode }
                                                         td("relative whitespace-nowrap py-4 pl-1 pr-1 text-right text-sm font-medium sm:pr-1") {
                                                             a(classes = "text-indigo-600 hover:text-indigo-900") {
                                                                 href = "#"
