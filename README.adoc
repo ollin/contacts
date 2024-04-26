@@ -35,6 +35,8 @@ changes immediately. This is possible with the continuous build:
 
 At the same time, you can run the server in development mode. I use the run configuration in IntelliJ IDEA.
 
+VM options: `-Dio.ktor.development=true`
+
 image::documentation/run-config-with-development-mode.png[my configuration in IntelliJ IDEA]
 
 As you can imagine there are more possible options to run the server in link:https://ktor.io/docs/development-mode.html[development mode].
