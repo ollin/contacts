@@ -27,10 +27,12 @@ fun Application.configureRouting() {
         delete<Contacts.Id> { contact ->
             repo.delete(contact.id)
 
-            call.response.header(HttpHeaders.Location, application.href<Contacts>(Contacts()))
-            call.respond(
-                HttpStatusCode.SeeOther,
-            )
+//            call.response.header(HttpHeaders.Location, application.href<Contacts>(Contacts()))
+//            call.respond(
+//                HttpStatusCode.SeeOther,
+//            )
+            call.response.header("HX-Tigger", "contact_deleted")
+            call.response.status(HttpStatusCode.OK)
         }
 
 
