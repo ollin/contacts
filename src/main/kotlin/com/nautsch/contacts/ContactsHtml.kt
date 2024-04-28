@@ -63,9 +63,9 @@ fun HTML.contacts(contactList: List<Contact>) {
                             div("-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8") {
                                 div("inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8") {
                                     div("overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg") {
-                                        attributes["x-data"] = "{ attr_confirmation_dialog_open: false }"
-                                        attributes["x-on:command_open_contact_delete_confirmation"] = "attr_confirmation_dialog_open = true"
-                                        attributes["x-on:command_close_contact_delete_confirmation"] = "attr_confirmation_dialog_open = false"
+                                        attributes["x-data"] = "{ attr_confirmation_dialog_open: false , contact_id: -1 }"
+                                        attributes["x-on:command_open_contact_delete_confirmation"] = "attr_confirmation_dialog_open = true, contact_id = event.detail.id"
+                                        attributes["x-on:command_close_contact_delete_confirmation"] = "attr_confirmation_dialog_open = false, contract_id = -1"
 
                                         contactTable(contactList)
                                         confirmationDialogDeleteContact()
@@ -139,10 +139,12 @@ inline fun DIV.contactTable(contactList: List<Contact>) {
                     }
                     td("relative whitespace-nowrap py-4 pl-1 pr-4 text-right text-sm font-medium sm:pr-4") {
                         a(classes = "text-red-600 hover:text-indigo-900") {
+                            id = "contact_${contact.id}"
                             attributes["hx-delete"] = "/contacts/${contact.id}"
-                            attributes["hx-target"] = "body"
-                            attributes["hx-trigger"] = "event_contact_delete_confirmed from:body"
-                            attributes["x-on:click"] = alpineJsDispatch("command_open_contact_delete_confirmation")
+                            attributes["hx-target"] = "closest tr"
+                            attributes["hx-swap"] = "outerHTML swap:1s"
+                            attributes["hx-trigger"] = "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
+                            attributes["x-on:click"] = alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }" )
                             +"""Delete"""
                         }
                     }
@@ -215,7 +217,8 @@ inline private fun DIV.confirmationDialogDeleteContact() {
                     div(classes = "mt-5 sm:mt-4 sm:flex sm:flex-row-reverse") {
                         button(classes = "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto") {
                             type = button
-                            attributes["x-on:click"] = alpineJsDispatch("command_close_contact_delete_confirmation") + alpineJsDispatch("event_contact_delete_confirmed")
+//                            attributes["x-on:click"] = alpineJsDispatch("command_close_contact_delete_confirmation") + alpineJsDispatch("'event_contact_delete_confirmed_for_contact_' + contact_id" )
+                            attributes["x-on:click"] = "\$dispatch( 'command_close_contact_delete_confirmation'); \$dispatch('event_contact_delete_confirmed_for_contact_' + contact_id );"
                             +"Delete"
                         }
                         button(classes = "mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto") {
@@ -290,10 +293,10 @@ inline private fun DIV.navBar() {
                         //                                +"""<!-- Profile dropdown -->"""
                         div("relative ml-3") {
                             attributes["x-cloak"]
-                            attributes["x-data"] = "{ open: false }"
-                            attributes["x-on:mouseenter"] = "open = true"
-                            attributes["x-on:mouseleave"] = "open = false"
-                            attributes["x-on:click.away"] = "open = false"
+                            attributes["x-data"] = "{ nav_bar_open: false }"
+                            attributes["x-on:mouseenter"] = "nav_bar_open = true"
+                            attributes["x-on:mouseleave"] = "nav_bar_open = false"
+                            attributes["x-on:click.away"] = "nav_bar_open = false"
 
                             div {
                                 button(classes = "relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800") {
@@ -327,7 +330,7 @@ inline private fun DIV.navBar() {
                                 attributes["aria-labelledby"] = "user-menu-button"
                                 attributes["tabindex"] = "-1"
 
-                                attributes["x-show"] = "open"
+                                attributes["x-show"] = "nav_bar_open"
                                 attributes["x-transition:enter"] = "transition ease-out duration-100"
                                 attributes["x-transition:enter-start"] = "opacity-0 scale-95"
                                 attributes["x-transition:enter-end"] = "opacity-100 scale-100"
