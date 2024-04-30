@@ -142,7 +142,7 @@ inline fun DIV.contactTable(contactList: List<Contact>) {
                             id = "contact_${contact.id}"
                             attributes["hx-delete"] = "/contacts/${contact.id}"
                             attributes["hx-target"] = "closest tr"
-                            attributes["hx-swap"] = "outerHTML swap:1s"
+                            attributes["hx-swap"] = "outerHTML swap:500ms"
                             attributes["hx-trigger"] = "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
                             attributes["x-on:click"] = alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }" )
                             +"""Delete"""
