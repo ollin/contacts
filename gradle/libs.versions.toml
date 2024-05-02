@@ -1,5 +1,5 @@
 [versions]
-cucumber = "7.15.0"
+cucumber = "7.17.0"
 
 jooq = "3.18.9" # same as spring
 jooqStuderPlugin = "9.0"
