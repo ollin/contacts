@@ -1,4 +1,9 @@
 [versions]
+cucumber = "7.15.0"
+
+jooq = "3.18.9" # same as spring
+jooqStuderPlugin = "9.0"
+
 kotlin = "1.9.23"
 
 kotlinxHtml = "0.11.0"
@@ -6,6 +11,7 @@ kotlinCss = "1.0.0-pre.129-kotlin-1.4.20"
 
 kotest = "5.8.1"
 kotlinFaker = "2.0.0-rc.1"
+kotlinxCoroutines = "1.7.3"
 
 ktor = "2.3.9"
 
@@ -13,14 +19,40 @@ logback = "1.4.14"
 
 nodePlugin = "7.0.2"
 
+springBoot = "3.2.2"
+springDependencyManagement = "1.1.4"
+springDoc = "2.3.0"
+springmockk = "4.0.2"
+
+thymeleaf-layout-dialect = "3.3.0"
+
+valiktor = "0.12.0"
+
 webjarsAlpinejs = "3.13.5"
 webjarsBootstrap = "5.3.3"
 webjarsBootstrapIcons = "1.11.3"
 webjarsHtmx = "1.9.10"
 webjarsHyperscript = "0.9.12"
-webjarsWailwindcss = "3.4.1"
+webjarsLocator = "0.55"
+webjarsTailwindcss = "3.4.1"
 
 [libraries]
+cucumberBom = { group = "io.cucumber", name = "cucumber-bom", version.ref = "cucumber" }
+cucumber-java = { group = "io.cucumber", name = "cucumber-java", version.ref = "cucumber" }
+cucumber-junit-platform-engine = { group = "io.cucumber", name = "cucumber-junit-platform-engine", version.ref = "cucumber" }
+cucumber-spring = { group = "io.cucumber", name = "cucumber-spring", version.ref = "cucumber" }
+
+fasterxml-jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
+fasterxml-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+
+flyway-core = { group = "org.flywaydb", name = "flyway-core"}
+
+h2 = { group = "com.h2database", name = "h2" }
+
+jooq-core = { group = "org.jooq", name = "jooq", version.ref = "jooq"}
+jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq"}
+jooq-meta-extensions = { group = "org.jooq", name = "jooq-meta-extensions", version.ref = "jooq"}
+
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
 kotestAssertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
@@ -30,6 +62,10 @@ kotestRunner = { group = "io.kotest", name = "kotest-runner-junit5", version.ref
 
 kotlinFaker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "kotlinFaker" }
 
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+
+kotlinxCoroutinesReactor = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-reactor", version.ref = "kotlinxCoroutines" }
+kotlinxCoroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-html-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-html-jvm", version.ref = "kotlinxHtml" }
 kotlin-css-jvm = { group = "org.jetbrains", name = "kotlin-css-jvm", version.ref = "kotlinCss" }
 
@@ -40,16 +76,48 @@ ktor-server-resources = { group = "io.ktor", name = "ktor-server-resources", ver
 ktor-server-tests-jvm = { group = "io.ktor", name = "ktor-server-tests-jvm", version.ref = "ktor" }
 ktor-server-webjars-jvm = { group = "io.ktor", name = "ktor-server-webjars-jvm", version.ref = "ktor" }
 
+spring-boot-autoconfigure = { group = "org.springframework.boot", name = "spring-boot-autoconfigure" }
+spring-boot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools" }
+spring-boot-starter-cache = { group = "org.springframework.boot", name = "spring-boot-starter-cache" }
+spring-boot-starter-data-mongodb = { group = "org.springframework.boot", name = "spring-boot-starter-data-mongodb" }
+spring-boot-starter-data-jdbc = { group = "org.springframework.boot", name = "spring-boot-starter-data-jdbc" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-starter-hateoas = { group = "org.springframework.boot", name = "spring-boot-starter-hateoas" }
+spring-boot-starter-jdbc = { group = "org.springframework.boot", name = "spring-boot-starter-jdbc"}
+spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq"}
+spring-boot-starter-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server"}
+spring-boot-starter-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-boot-starter-thymeleaf = { group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf" }
+spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+spring-boot-test =  { group = "org.springframework.boot", name = "spring-boot-test"}
+spring-context = { group = "org.springframework", name = "spring-context" }
+spring-data-commons = { group = "org.springframework.data", name = "spring-data-commons" }
+spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
+spring-test = { group = "org.springframework", name = "spring-test" }
+spring-webflux = { group = "org.springframework", name = "spring-webflux" }
+springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springDoc" }
+springmockk = {group = "com.ninja-squad", name = "springmockk", version.ref = "springmockk"}
+
+thymeleaf-layout-dialect = { group = "nz.net.ultraq.thymeleaf", name = "thymeleaf-layout-dialect", version.ref = "thymeleaf-layout-dialect" }
+
+urlbuilder = { group = "io.mikael", name = "urlbuilder", version = "2.0.9" }
+valiktor = { group = "org.valiktor", name = "valiktor-core", version.ref = "valiktor" }
 
 webjars-alpinejs = { group = "org.webjars.npm", name = "alpinejs", version.ref = "webjarsAlpinejs" }
 webjars-bootstrap-core = { group = "org.webjars", name = "bootstrap", version.ref = "webjarsBootstrap" }
 webjars-bootstrap-icons = { group = "org.webjars.npm", name = "bootstrap-icons", version.ref = "webjarsBootstrapIcons" }
 webjars-htmx = { group = "org.webjars.npm", name = "htmx.org", version.ref = "webjarsHtmx" }
+webjars-locator-core = { group = "org.webjars", name = "webjars-locator-core", version.ref = "webjarsLocator" }
 webjars-hyperscript = { group = "org.webjars.npm", name = "hyperscript.org", version.ref = "webjarsHyperscript" }
-webjars-tailwindcss = { group = "org.webjars.npm", name = "tailwindcss", version.ref = "webjarsWailwindcss" }
+webjars-tailwindcss = { group = "org.webjars.npm", name = "tailwindcss", version.ref = "webjarsTailwindcss" }
 
 [bundles]
 kotest = ["kotestAssertions", "kotestCommon", "kotestFrameworkDatatest", "kotestRunner"]
+kotlinxCoroutinesAll = ["kotlinxCoroutines", "kotlinxCoroutinesReactor"]
+cucumberWithSpring = ["cucumber-java", "cucumber-junit-platform-engine", "cucumber-spring"]
 
 [plugins]
 nodePlugin = { id = "com.github.node-gradle.node", version.ref = "nodePlugin"}
+jooqStuderPlugin = { id = "nu.studer.jooq", version.ref = "jooqStuderPlugin" }

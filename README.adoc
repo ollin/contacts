@@ -1,42 +1,24 @@
-= Contacts
+# Content
 
-Example project based on the htmx book at https://hypermedia.systems/
+## with-ktor-typesafe-html
 
-This example is using the following technologies:
+Contains the project with the following stack:
 
 * kotlin
-* kotlin html dsl
+* kotlin typesafe html dsl
 * htmx
 * alpine js
 * tailwind css
 * ktor (web server)
 
-* gradle (build tool) with kotlin dsl
-** node, npm, npx are integrated into the gradle build
 
-== Build
+## with-spring-boot-thymeleaf
 
-Install all dependencies and build:
+Contains the project with the following stack:
 
-[source,bash]
-----
-./gradlew build
-----
-
-=== Continuous build
-
-During development, you want to edit a file while running the project and see the
-changes immediately. This is possible with the continuous build:
-
-[source,bash]
-----
-./gradlew build -t
-----
-
-At the same time, you can run the server in development mode. I use the run configuration in IntelliJ IDEA.
-
-VM options: `-Dio.ktor.development=true`
-
-image::documentation/run-config-with-development-mode.png[my configuration in IntelliJ IDEA]
-
-As you can imagine there are more possible options to run the server in link:https://ktor.io/docs/development-mode.html[development mode].
+* kotlin
+* thymeleaf
+* htmx
+* alpine js
+* bootstrap css
+* spring boot (web server)
