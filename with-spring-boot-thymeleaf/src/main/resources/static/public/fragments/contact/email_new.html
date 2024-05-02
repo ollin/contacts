@@ -1,0 +1,39 @@
+<div
+        th:fragment="contact_email_form_group"
+        id="contact_email_form_group"
+        class="form-group"
+
+        x-data="{ valid: true }"
+        x-on:contact_email_validation_failed="valid = false"
+        x-on:contact_email_validation_succeeded="valid = true"
+>
+    <label
+            id="email_label"
+            for="email_input">Email</label>
+    <input
+            id="email_input"
+            type="email"
+            class="form-control"
+            th:errorclass="is-invalid"
+            x-bind:class="valid ? '' : 'is-invalid'"
+
+            placeholder="Email"
+            required
+            th:field="*{contact.email}"
+
+            hx-trigger="change, keyup delay:250ms changed"
+            hx-get="/contacts/email_unique_validation"
+            hx-target="#contact_email_error"
+            hx-swap="outerHTML"
+    >
+    <!--/*@thymesVar id="contact" type="com.nautsch.htmxbook.contactmanagement.NewContactForm"*/-->
+    <div
+            th:fragment="contact_email_error"
+            id="contact_email_error"
+            th:classappend="${contact.hasErrors} ? 'invalid-feedback' : ''"
+    >
+        <ul th:if="${contact.hasErrors}">
+            <li th:each="error : ${contact.errors}" th:text="${error}"></li>
+        </ul>
+    </div>
+</div>

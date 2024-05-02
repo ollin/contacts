@@ -1,0 +1,26 @@
+<!--/*@thymesVar id="contactsPage" type="org.springframework.data.domain.Page<com.nautsch.htmxbook.contactmanagement.Contact>"*/-->
+<tr th:each="contact : ${contactsPage.getContent()}" th:fragment="contact_rows">
+    <td>
+        <input
+                th:type="checkbox"
+                th:id="@{contact_selected_${contact.id}}"
+                th:name="selected_contact_ids"
+                th:value="${contact.id}"
+        >
+
+        </input>
+    </td>
+    <td th:text="${contact.name}"></td>
+    <td th:text="${contact.phone}"></td>
+    <td th:text="${contact.email}"></td>
+    <td class="d-flex align-items-center text-nowrap gap-2">
+        <a th:href="@{/contacts/{id}(id=${contact.id})}" class="btn btn-secondary btn-sm">View</a>
+        <a th:href="@{/contacts/{id}/edit(id=${contact.id})}" class="btn btn-primary btn-sm">Edit</a>
+        <a
+                th:data-hx-delete="@{/contacts/{id}(id=${contact.id})}"
+                hx-confirm="Are you sure you want to delete this contact?"
+                hx-swap="outerHTML swap:1s"
+                class="btn btn-danger btn-sm"
+                hx-target="closest tr">Delete</a>
+    </td>
+</tr>
