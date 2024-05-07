@@ -140,6 +140,7 @@ inline fun DIV.contactTable(contactList: List<Contact>) {
                     td("relative whitespace-nowrap py-4 pl-1 pr-4 text-right text-sm font-medium sm:pr-4") {
                         a(classes = "text-red-600 hover:text-indigo-900") {
                             id = "contact_${contact.id}"
+                            href = "#"
                             attributes["hx-delete"] = "/contacts/${contact.id}"
                             attributes["hx-target"] = "closest tr"
                             attributes["hx-swap"] = "outerHTML swap:500ms"
@@ -210,7 +211,7 @@ inline private fun DIV.confirmationDialogDeleteContact() {
                                 +"Delete Contact"
                             }
                             div(classes = "mt-2") {
-                                p(classes = "text-sm text-gray-500") { +"Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone." }
+                                p(classes = "text-sm text-gray-500") { +"Are you sure you want to delete the contact? All the data will be permanently removed from our servers forever. This action cannot be undone." }
                             }
                         }
                     }
