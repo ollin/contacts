@@ -1,8 +1,7 @@
 [versions]
 cucumber = "7.15.0"
 
-jooq = "3.18.9" # same as spring
-jooqStuderPlugin = "9.0"
+jooq = "3.19.7" # same as spring
 
 kotlin = "1.9.23"
 
@@ -51,7 +50,8 @@ h2 = { group = "com.h2database", name = "h2" }
 
 jooq-core = { group = "org.jooq", name = "jooq", version.ref = "jooq"}
 jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq"}
-jooq-meta-extensions = { group = "org.jooq", name = "jooq-meta-extensions", version.ref = "jooq"}
+jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jooq"}
+jooq-metaExtensions = { group = "org.jooq", name = "jooq-meta-extensions", version.ref = "jooq"}
 
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
@@ -120,4 +120,4 @@ cucumberWithSpring = ["cucumber-java", "cucumber-junit-platform-engine", "cucumb
 
 [plugins]
 nodePlugin = { id = "com.github.node-gradle.node", version.ref = "nodePlugin"}
-jooqStuderPlugin = { id = "nu.studer.jooq", version.ref = "jooqStuderPlugin" }
+jooqCodegen = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
