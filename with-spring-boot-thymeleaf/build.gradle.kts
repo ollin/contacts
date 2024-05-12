@@ -3,19 +3,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.meta.jaxb.Property
 
 plugins {
+    base
     idea
+    kotlin("jvm")
     id("org.springframework.boot") version libs.versions.springBoot
     id("io.spring.dependency-management") version libs.versions.springDependencyManagement
     alias(libs.plugins.jooqStuderPlugin)
-    kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.spring") version libs.versions.kotlin
 }
 
-group = "com.nautsch"
-version = "0.0.1-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+java {
+    sourceCompatibility = VERSION_21
 }
 
 dependencies {
@@ -52,15 +51,6 @@ dependencies {
 
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.bundles.kotest)
-}
-
-idea {
-    module.isDownloadJavadoc = true
-    module.isDownloadSources = true
-}
-
-java {
-    sourceCompatibility = VERSION_21
 }
 
 tasks.withType<KotlinCompile> {
