@@ -1,6 +1,5 @@
 import org.gradle.api.JavaVersion.VERSION_21
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jooq.meta.jaxb.Property
 
 plugins {
     base
@@ -10,6 +9,14 @@ plugins {
     id("io.spring.dependency-management") version libs.versions.springDependencyManagement
     alias(libs.plugins.jooqCodegen)
     kotlin("plugin.spring") version libs.versions.kotlin
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("build/generated-sources/jooq")
+        }
+    }
 }
 
 
@@ -70,6 +77,9 @@ tasks.withType<Test> {
 jooq {
     configuration {
         generator {
+            target {
+                directory = "./build/generated-sources/jooq"
+            }
             database {
                 name = "org.jooq.meta.extensions.ddl.DDLDatabase"
                 properties {
