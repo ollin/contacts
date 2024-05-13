@@ -11,5 +11,5 @@ fun main() {
 
 fun Application.module() {
     configureTemplating()
-    configureRouting()
+    configureRouting(this@module)
 }

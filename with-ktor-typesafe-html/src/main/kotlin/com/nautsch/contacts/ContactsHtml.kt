@@ -1,11 +1,13 @@
 package com.nautsch.contacts
 
 import com.nautsch.utils.alpineJsDispatch
+import io.ktor.server.application.*
+import io.ktor.server.resources.*
 import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.ThScope.col
 
-fun HTML.contacts(contactList: List<Contact>) {
+fun HTML.contacts(application: Application, contactList: List<Contact>) {
     classes = setOf("h-full", "bg-gray-100")
 
     head {
@@ -67,7 +69,7 @@ fun HTML.contacts(contactList: List<Contact>) {
                                         attributes["x-on:command_open_contact_delete_confirmation"] = "attr_confirmation_dialog_open = true, contact_id = event.detail.id"
                                         attributes["x-on:command_close_contact_delete_confirmation"] = "attr_confirmation_dialog_open = false, contract_id = -1"
 
-                                        contactTable(contactList)
+                                        contactTable(application, contactList)
                                         confirmationDialogDeleteContact()
                                     }
                                 }
@@ -89,7 +91,7 @@ fun HTML.contacts(contactList: List<Contact>) {
 
 
 @HtmlTagMarker
-inline fun DIV.contactTable(contactList: List<Contact>) {
+inline fun DIV.contactTable(application: Application, contactList: List<Contact>) {
     table("min-w-full divide-y divide-gray-300") {
         thead("bg-gray-50") {
             tr {
@@ -137,15 +139,18 @@ inline fun DIV.contactTable(contactList: List<Contact>) {
                             +"""Edit"""
                         }
                     }
+
                     td("relative whitespace-nowrap py-4 pl-1 pr-4 text-right text-sm font-medium sm:pr-4") {
                         a(classes = "text-red-600 hover:text-indigo-900") {
                             id = "contact_${contact.id}"
                             href = "#"
-                            attributes["hx-delete"] = "/contacts/${contact.id}"
+                            attributes["hx-delete"] = application.href<Contacts.Id>(Contacts.Id(id = contact.id))
                             attributes["hx-target"] = "closest tr"
                             attributes["hx-swap"] = "outerHTML swap:500ms"
-                            attributes["hx-trigger"] = "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
-                            attributes["x-on:click"] = alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }" )
+                            attributes["hx-trigger"] =
+                                "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
+                            attributes["x-on:click"] =
+                                alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }")
                             +"""Delete"""
                         }
                     }

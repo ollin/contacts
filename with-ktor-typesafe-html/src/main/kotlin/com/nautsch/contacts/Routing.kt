@@ -9,7 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.webjars.*
 
-fun Application.configureRouting() {
+fun Application.configureRouting(application: Application) {
 
     val repo = ContactRepository()
 
@@ -21,16 +21,12 @@ fun Application.configureRouting() {
     routing {
         get<Contacts> { contacts ->
             call.respondHtml(HttpStatusCode.OK) {
-                contacts(repo.listAll())
+                contacts(application, repo.listAll())
             }
         }
         delete<Contacts.Id> { contact ->
             repo.delete(contact.id)
 
-//            call.response.header(HttpHeaders.Location, application.href<Contacts>(Contacts()))
-//            call.respond(
-//                HttpStatusCode.SeeOther,
-//            )
             call.response.header("HX-Tigger", "contact_deleted")
             call.response.status(HttpStatusCode.OK)
         }
@@ -38,7 +34,7 @@ fun Application.configureRouting() {
 
 
         get("/") {
-            call.respondRedirect("/contacts")
+            call.respondRedirect(application.href(Contacts()))
         }
 
         get("/webjars") {
