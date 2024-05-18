@@ -50,6 +50,7 @@ dependencies {
 
 
 tasks.register("generateTailwindCSS", NpxTask::class) {
+    dependsOn("npmInstall")
     command.set("tailwindcss")
     args.set(
         listOf(
