@@ -3,6 +3,7 @@ package com.nautsch.contacts
 import com.nautsch.utils.alpineJsDispatch
 import io.ktor.server.application.*
 import io.ktor.server.resources.*
+import kotlinx.css.td
 import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.ThScope.col
@@ -22,9 +23,8 @@ fun HTML.contacts(application: Application, contactList: List<Contact>) {
                 }
             """.trimIndent()
             }
-            script { type = ScriptType.textJavaScript; src = "/webjars/bootstrap/js/bootstrap.min.js" }
-            script { type = ScriptType.textJavaScript; src = "/webjars/htmx.org/dist/htmx.min.js" }
             script { type = ScriptType.textJavaScript; src = "/webjars/alpinejs/dist/cdn.js"; defer = true }
+            script { type = ScriptType.textJavaScript; src = "/webjars/htmx.org/dist/htmx.min.js" }
 
             link { rel = ARel.stylesheet; href = "/public/css/output.css" }
         }
@@ -65,9 +65,12 @@ fun HTML.contacts(application: Application, contactList: List<Contact>) {
                             div("-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8") {
                                 div("inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8") {
                                     div("overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg") {
-                                        attributes["x-data"] = "{ attr_confirmation_dialog_open: false , contact_id: -1 }"
-                                        attributes["x-on:command_open_contact_delete_confirmation"] = "attr_confirmation_dialog_open = true, contact_id = event.detail.id"
-                                        attributes["x-on:command_close_contact_delete_confirmation"] = "attr_confirmation_dialog_open = false, contract_id = -1"
+                                        attributes["x-data"] =
+                                            "{ attr_confirmation_dialog_open: false , contact_id: -1 }"
+                                        attributes["x-on:command_open_contact_delete_confirmation"] =
+                                            "attr_confirmation_dialog_open = true, contact_id = event.detail.id"
+                                        attributes["x-on:command_close_contact_delete_confirmation"] =
+                                            "attr_confirmation_dialog_open = false, contract_id = -1"
 
                                         contactTable(application, contactList)
                                         confirmationDialogDeleteContact()
@@ -92,69 +95,76 @@ fun HTML.contacts(application: Application, contactList: List<Contact>) {
 
 @HtmlTagMarker
 inline fun DIV.contactTable(application: Application, contactList: List<Contact>) {
-    table("min-w-full divide-y divide-gray-300") {
+    table("table") {
         thead("bg-gray-50") {
             tr {
-                th(classes = "py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6") {
+                th {
                     scope = col
                     +"""First Name"""
                 }
-                th(classes = "px-3 py-3.5 text-left text-sm font-semibold text-gray-900") {
+                th {
                     scope = col
                     +"""Last Name"""
                 }
-                th(classes = "px-3 py-3.5 text-left text-sm font-semibold text-gray-900") {
+                th {
                     scope = col
                     +"""Email"""
                 }
-                th(classes = "px-3 py-3.5 text-left text-sm font-semibold text-gray-900") {
+                th {
                     scope = col
                     +"""Phone"""
                 }
-                th(classes = "px-3 py-3.5 text-left text-sm font-semibold text-gray-900") {
+                th {
                     scope = col
                     +"""Postal Code"""
                 }
-                th(classes = "relative py-3.5 pl-1 pr-1 sm:pr-1") {
+                th {
                     scope = col
                     span("sr-only") { +"""Edit""" }
                 }
-                th(classes = "relative py-3.5 pl-1 pr-4 sm:pr-4") {
+                th {
                     scope = col
                     span("sr-only") { +"""Delete""" }
                 }
             }
         }
-        tbody("divide-y divide-gray-200 bg-white") {
+        tbody( classes = "bg-white divide-y divide-gray-200") {
             contactList.forEach { contact ->
-                tr {
-                    td("whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6") { +contact.firstName }
-                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.lastName }
-                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.email }
-                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.phone }
-                    td("whitespace-nowrap px-3 py-4 text-sm text-gray-900") { +contact.postalCode }
-                    td("relative whitespace-nowrap py-4 pl-1 pr-1 text-right text-sm font-medium sm:pr-1") {
-                        a(classes = "text-indigo-600 hover:text-indigo-900") {
-                            href = "#"
-                            +"""Edit"""
-                        }
-                    }
+                contactTableRowForShow(contact, application)
+            }
+        }
+    }
+}
 
-                    td("relative whitespace-nowrap py-4 pl-1 pr-4 text-right text-sm font-medium sm:pr-4") {
-a(classes = "text-red-600 hover:text-indigo-900") {
-    id = "contact_${contact.id}"
-    href = "#"
-    attributes["hx-delete"] = application.href<Contacts.Id>(Contacts.Id(id = contact.id))
-                            attributes["hx-target"] = "closest tr"
-                            attributes["hx-swap"] = "outerHTML swap:500ms"
-                            attributes["hx-trigger"] =
-                                "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
-                            attributes["x-on:click"] =
-                                alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }")
-                            +"""Delete"""
-                        }
-                    }
-                }
+fun TBODY.contactTableRowForShow(
+    contact: Contact,
+    application: Application
+) {
+    tr(classes = "hover:bg-gray-100") {
+        td { +contact.firstName }
+        td { +contact.lastName }
+        td { +contact.email }
+        td { +contact.phone }
+        td { +contact.postalCode }
+        td {
+            a(classes = "btn btn-outline btn-sm") {
+                href = "#"
+                +"""Edit"""
+            }
+        }
+
+        td {
+            a(classes = "btn btn-outline btn-error btn-sm") {
+                id = "contact_${contact.id}"
+                href = "#"
+                attributes["hx-delete"] = application.href<Contacts.Id>(Contacts.Id(id = contact.id))
+                attributes["hx-target"] = "closest tr"
+                attributes["hx-swap"] = "outerHTML swap:500ms"
+                attributes["hx-trigger"] =
+                    "event_contact_delete_confirmed_for_contact_${contact.id} from:body"
+                attributes["x-on:click"] =
+                    alpineJsDispatch("command_open_contact_delete_confirmation", "{ id: '${contact.id}' }")
+                +"""Delete"""
             }
         }
     }
@@ -163,6 +173,7 @@ a(classes = "text-red-600 hover:text-indigo-900") {
 @HtmlTagMarker
 inline private fun DIV.confirmationDialogDeleteContact() {
     div(classes = "relative z-10") {
+        attributes["x-cloak"]
         attributes["x-show"] = "attr_confirmation_dialog_open"
         attributes["aria-labelledby"] = "modal-title"
         attributes["role"] = "dialog"
@@ -185,7 +196,8 @@ inline private fun DIV.confirmationDialogDeleteContact() {
                     div(classes = "absolute right-0 top-0 hidden pr-4 pt-4 sm:block") {
                         button(classes = "rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2") {
                             type = button
-                            attributes["x-on:click"] = alpineJsDispatch("command_close_contact_delete_confirmation") // Schließt das Modal
+                            attributes["x-on:click"] =
+                                alpineJsDispatch("command_close_contact_delete_confirmation") // Schließt das Modal
                             span(classes = "sr-only") { +"Close" }
                             svg(classes = "h-6 w-6") {
                                 attributes["fill"] = "none"
@@ -224,7 +236,8 @@ inline private fun DIV.confirmationDialogDeleteContact() {
                         button(classes = "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto") {
                             type = button
 //                            attributes["x-on:click"] = alpineJsDispatch("command_close_contact_delete_confirmation") + alpineJsDispatch("'event_contact_delete_confirmed_for_contact_' + contact_id" )
-                            attributes["x-on:click"] = "\$dispatch( 'command_close_contact_delete_confirmation'); \$dispatch('event_contact_delete_confirmed_for_contact_' + contact_id );"
+                            attributes["x-on:click"] =
+                                "\$dispatch( 'command_close_contact_delete_confirmation'); \$dispatch('event_contact_delete_confirmed_for_contact_' + contact_id );"
                             +"Delete"
                         }
                         button(classes = "mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto") {
