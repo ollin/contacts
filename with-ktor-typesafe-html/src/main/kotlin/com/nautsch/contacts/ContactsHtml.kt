@@ -3,7 +3,6 @@ package com.nautsch.contacts
 import com.nautsch.utils.alpineJsDispatch
 import io.ktor.server.application.*
 import io.ktor.server.resources.*
-import kotlinx.css.td
 import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.ThScope.col
@@ -98,37 +97,20 @@ inline fun DIV.contactTable(application: Application, contactList: List<Contact>
     table("table") {
         thead("bg-gray-50") {
             tr {
-                th {
-                    scope = col
-                    +"""First Name"""
-                }
-                th {
-                    scope = col
-                    +"""Last Name"""
-                }
-                th {
-                    scope = col
-                    +"""Email"""
-                }
-                th {
-                    scope = col
-                    +"""Phone"""
-                }
-                th {
-                    scope = col
-                    +"""Postal Code"""
-                }
-                th {
-                    scope = col
+                th {scope = col; +"First Name"}
+                th {scope = col; +"Last Name"}
+                th {scope = col; +"Email"}
+                th {scope = col; +"Phone"}
+                th {scope = col; +"Postal Code"}
+                th {scope = col;
                     span("sr-only") { +"""Edit""" }
                 }
-                th {
-                    scope = col
+                th {scope = col
                     span("sr-only") { +"""Delete""" }
                 }
             }
         }
-        tbody( classes = "bg-white divide-y divide-gray-200") {
+        tbody(classes = "bg-white divide-y divide-gray-200") {
             contactList.forEach { contact ->
                 contactTableRowForShow(contact, application)
             }
@@ -171,7 +153,7 @@ fun TBODY.contactTableRowForShow(
 }
 
 @HtmlTagMarker
-inline private fun DIV.confirmationDialogDeleteContact() {
+private inline fun DIV.confirmationDialogDeleteContact() {
     div(classes = "relative z-10") {
         attributes["x-cloak"]
         attributes["x-show"] = "attr_confirmation_dialog_open"
@@ -253,7 +235,7 @@ inline private fun DIV.confirmationDialogDeleteContact() {
 }
 
 @HtmlTagMarker
-inline private fun DIV.navBar() {
+private inline fun DIV.navBar() {
     nav(classes = "bg-gray-800") {
         div(classes = "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8") {
             div(classes = "flex h-16 items-center justify-between") {
