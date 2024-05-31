@@ -1,7 +1,7 @@
 [versions]
 cucumber = "7.18.0"
 
-jooq = "3.19.8"
+jooq = "3.19.9"
 
 kotlin = "2.0.0"
 
