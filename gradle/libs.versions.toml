@@ -12,7 +12,7 @@ kotest = "5.9.1"
 kotlinFaker = "2.0.0-rc.6"
 kotlinxCoroutines = "1.8.1"
 
-ktor = "2.3.11"
+ktor = "2.3.12"
 
 logback = "1.5.8"
 
