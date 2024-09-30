@@ -16,7 +16,7 @@ ktor = "2.3.11"
 
 logback = "1.5.8"
 
-nodePlugin = "7.0.2"
+nodePlugin = "7.1.0"
 
 springBoot = "3.2.2"
 springDependencyManagement = "1.1.4"
