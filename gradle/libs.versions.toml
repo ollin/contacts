@@ -1,5 +1,5 @@
 [versions]
-cucumber = "7.18.1"
+cucumber = "7.20.1"
 
 jooq = "3.19.11"
 
