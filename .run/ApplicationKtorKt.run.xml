@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ApplicationKtorKt" type="KtorApplicationConfigurationType" factoryName="Ktor" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="com.nautsch.contacts.ApplicationKtorKt" />
+    <module name="contacts.with-ktor-typesafe-html.main" />
+    <option name="PROGRAM_PARAMETERS" value="com.sun.management.jmxremote=false" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.nautsch.contacts.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="alternativeJrePath" />
+    <option name="alternativeJrePathEnabled" value="false" />
+    <option name="includeProvidedScope" value="false" />
+    <option name="mainClass" value="com.nautsch.contacts.ApplicationKtorKt" />
+    <option name="passParentEnvs" value="true" />
+    <option name="programParameters" value="com.sun.management.jmxremote=false" />
+    <option name="shortenCommandLine" />
+    <option name="vmParameters" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

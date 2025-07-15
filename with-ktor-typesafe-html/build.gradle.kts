@@ -16,8 +16,10 @@ java {
 }
 
 application {
-    mainClass.set("com.nautsch.ApplicationKt")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
+    mainClass.set("com.nautsch.contacts.ApplicationKtorKt")
+    applicationDefaultJvmArgs = listOf(
+        "-Dio.ktor.development=true",
+    )
 }
 
 repositories {
