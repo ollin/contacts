@@ -22,7 +22,6 @@ application {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
 
 dependencies {
@@ -44,8 +43,14 @@ dependencies {
     implementation(libs.webjars.htmx)
     implementation(libs.webjars.hyperscript)
 
-    testImplementation(libs.ktor.server.tests.jvm)
+    testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.bundles.kotest)
+}
+
+node {
+    // workaround for hasn't merged https://github.com/node-gradle/gradle-node-plugin/pull/328 (2025-07-15)
+//    npmCommand = "/opt/homebrew/bin/npm"
+    download = true
 }
 
 
