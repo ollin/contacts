@@ -19,7 +19,7 @@ webjarsBootstrapIcons = "1.11.3"
 webjarsHtmx = "2.0.2"
 webjarsHyperscript = "0.9.12"
 webjarsLocator = "0.59"
-webjarsTailwindcss = "3.4.10"
+webjarsTailwindcss = "3.4.14"
 
 [libraries]
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
